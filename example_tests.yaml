@@ -1,0 +1,37 @@
+name: A set of example tests
+description: A set of example tests to demonstrate the functionality of auditor.
+pass_type: all # One of all, one, percent
+percent_required: 90 # Required if pass_type is percent to define the required amount of passed tests to pass
+tests:
+- name:
+  type: http
+  test:
+    request:
+      host:
+      port:
+      headers:
+        User-Agent: auditor
+      body_type: json # 'plain' or 'json' Defaults to 'plain'
+      body:
+        example_key: example_data
+    criteria:
+      all: True #Do all Validation checks need to pass for this test to pass
+      checks:
+        - name: Check content type is JSON
+          inverse: false # Set to true to make the failing of this check actually evaluate to true.
+          headers:
+            Content-Type: application/json
+         - name: Check response code is 200
+           inverse: false
+           code: 200
+         - name: Check Body matches regex
+           inverse: false
+           body:
+             regex: #Optional regex to match something in the body
+         - name: Check body contains JSON key and Value
+           inverse: false
+           body:
+             json: # Optional key to find in a returned JSON object
+        
+
+    
